@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Credit: https://stackoverflow.com/questions/28320134/how-to-list-all-tags-for-a-docker-image-on-a-remote-registry
+
+set -e
+
+IMAGE="$1"
+
+if [[ -z "$IMAGE" ]]; then
+	echo "Error: Please provide a docker image name"
+	echo "Usage: docker-list-image <image name>"
+	echo "Example: docker-list-image mysql"
+	exit 1
+fi
+
+VERSIONS=$(curl -L -s "https://registry.hub.docker.com/v1/repositories/$IMAGE/tags" | jq -r '.[].name')
+
+echo "Available tags for $IMAGE:"
+echo
+column <(echo "$VERSIONS")
