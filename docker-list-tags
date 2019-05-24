@@ -12,8 +12,15 @@ if [[ -z "$IMAGE" ]]; then
 	exit 1
 fi
 
-VERSIONS=$(curl -L -s "https://registry.hub.docker.com/v1/repositories/$IMAGE/tags" | jq -r '.[].name')
+RESPONSE=$(curl -L -s "https://registry.hub.docker.com/v1/repositories/$IMAGE/tags")
 
-echo "Available tags for $IMAGE:"
+if [[ "$RESPONSE" == *"Resource not found"* ]]; then
+	echo "The image '$IMAGE' does not exist in the official Docker registry (Resource not found)"
+	exit 1
+fi
+
+VERSIONS=$(echo "$RESPONSE" | jq -r '.[].name')
+
+echo "Available tags for '$IMAGE':"
 echo
 column <(echo "$VERSIONS")
