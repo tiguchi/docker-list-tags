@@ -7,8 +7,8 @@ IMAGE="$1"
 
 if [[ -z "$IMAGE" ]]; then
 	echo "Error: Please provide a docker image name"
-	echo "Usage: docker-list-image <image name>"
-	echo "Example: docker-list-image mysql"
+	echo "Usage: docker-list-tags <image name>"
+	echo "Example: docker-list-tags mysql"
 	exit 1
 fi
 

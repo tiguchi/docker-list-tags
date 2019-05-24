@@ -5,13 +5,13 @@ Bash script for retrieving all version tags for any Docker image from the Docker
 ## Usage
 
 ```
-docker-list-image <image name>
+docker-list-tags <image name>
 ```
 
 ### Example
 
 ```
-$ docker-list-image mysql
+$ docker-list-tags mysql
 Available tags for mysql
 
 latest          5.5.47          5.5.57          5.6.22          5.6.32          5.6.42          5.7.16          5.7.26          5.7.8-rc        8.0.15
